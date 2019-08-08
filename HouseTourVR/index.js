@@ -5,6 +5,8 @@ import {
   Text,
   View,
   VrButton,
+  Environment,
+  asset,
 } from 'react-360';
 import house from './data/houseData'
 
@@ -20,7 +22,9 @@ export default class HouseTourVR extends React.Component {
       room: house[roomSelection].roomName,
       info: house[roomSelection].info,
       adjacentRooms: house[roomSelection].adjacentRooms
-    })
+    });
+
+    Environment.setBackgroundImage(asset(`./360_${house[roomSelection].img}`))
   }
 
   createRoomButtons(adjacentRooms) {
