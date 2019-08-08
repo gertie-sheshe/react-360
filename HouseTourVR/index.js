@@ -4,10 +4,16 @@ import {
   StyleSheet,
   Text,
   View,
+  VrButton,
 } from 'react-360';
 import house from './data/houseData'
 
 export default class HouseTourVR extends React.Component {
+  state = {
+    room: house.House.roomName,
+    info: house.House.info,
+    adjacentRooms: house.House.adjacentRooms
+  }
   render() {
     return (
       <View style={styles.panel}>
