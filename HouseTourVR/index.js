@@ -15,13 +15,21 @@ export default class HouseTourVR extends React.Component {
     adjacentRooms: house.House.adjacentRooms
   }
 
+  clickHandler(roomSelection) {
+    this.setState({
+      room: house[roomSelection].roomName,
+      info: house[roomSelection].info,
+      adjacentRooms: house[roomSelection].adjacentRooms
+    })
+  }
+
   createRoomButtons(adjacentRooms) {
     let rooms = adjacentRooms;
     let buttons = [];
 
     rooms.map(room => (
       buttons.push(
-      <VrButton key = { `${room} - button`}>
+      <VrButton key = {`${room} - button`} onClick={() => this.clickHandler(room)}>
         <Text style={{backgroundColor: 'green'}}>{ room }</Text>
       </VrButton>
     )
