@@ -14,6 +14,22 @@ export default class HouseTourVR extends React.Component {
     info: house.House.info,
     adjacentRooms: house.House.adjacentRooms
   }
+
+  createRoomButtons(adjacentRooms) {
+    let rooms = adjacentRooms;
+    let buttons = [];
+
+    rooms.map(room => (
+      buttons.push(
+      <VrButton key = { `${room} - button`}>
+        <Text style={{backgroundColor: 'green'}}>{ room }</Text>
+      </VrButton>
+    )
+    ));
+
+    return buttons;
+  }
+
   render() {
     return (
       <View style={styles.panel}>
@@ -22,8 +38,9 @@ export default class HouseTourVR extends React.Component {
             Room Selection
           </Text>
           <Text>
-            { house.House.roomName }
+            { this.state.room }
           </Text>
+          { this.createRoomButtons(this.state.adjacentRooms) }
         </View>
 
 
@@ -32,7 +49,7 @@ export default class HouseTourVR extends React.Component {
             Room Info
           </Text>
           <Text>
-            { house.House.info }
+            { this.state.info }
           </Text>
         </View>
 
