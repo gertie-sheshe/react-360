@@ -5,6 +5,7 @@ import {
   Text,
   View,
 } from 'react-360';
+import house from './data/houseData'
 
 export default class HouseTourVR extends React.Component {
   render() {
@@ -12,9 +13,23 @@ export default class HouseTourVR extends React.Component {
       <View style={styles.panel}>
         <View style={styles.greetingBox}>
           <Text style={styles.greeting}>
-            Welcome to React 360
+            Room Selection
+          </Text>
+          <Text>
+            { house.House.roomName }
           </Text>
         </View>
+
+
+        <View style={styles.greetingBox}>
+          <Text style={styles.greeting}>
+            Room Info
+          </Text>
+          <Text>
+            { house.House.info }
+          </Text>
+        </View>
+
       </View>
     );
   }
@@ -26,7 +41,8 @@ const styles = StyleSheet.create({
     width: 1000,
     height: 600,
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   greetingBox: {
