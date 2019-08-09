@@ -5,17 +5,34 @@ import {
   Text,
   View,
   VrButton,
-  Environment,
-  asset
 } from "react-360";
-import house from "./data/houseData";
+
 import { connect, changeRoom } from './store';
 
-export default class Buttons extends React.Component {
+class Button extends React.Component {
+  state = {
+    hover: false
+  }
 
   clickHandler(roomSelection) {
     changeRoom(roomSelection);
   }
+
+  render() {
+    return (
+      <VrButton
+          style={this.state.hover ? styles.hover : styles.button}
+          onEnter={}
+          onExit={}
+          onClick={() => this.clickHandler(room)}
+        >
+          <Text style={{ backgroundColor: "green" }}>{room}</Text>
+        </VrButton>
+    )
+  }
+}
+
+class ButtonInfoPanel extends React.Component {
 
   createRoomButtons(adjacentRooms) {
     let rooms = adjacentRooms;
@@ -24,12 +41,7 @@ export default class Buttons extends React.Component {
 
     rooms.map(room =>
       buttons.push(
-        <VrButton
-          key={`${room} - button`}
-          onClick={() => this.clickHandler(room)}
-        >
-          <Text style={{ backgroundColor: "green" }}>{room}</Text>
-        </VrButton>
+        <Button key = {`${room} - button`} room = {room} />
       )
     );
 
@@ -38,10 +50,9 @@ export default class Buttons extends React.Component {
 
   render() {
     return (
-      <View style={styles.panel}>
-        <View style={styles.greetingBox}>
-          <Text style={styles.greeting}>Room Selection</Text>
-          <Text>{this.props.room}</Text>
+      <View>
+        <View style={styles.buttonPanel}>
+          <Text style={styles.header}>Room Selection</Text>
           {this.createRoomButtons(this.props.adjacentRooms)}
         </View>
       </View>
@@ -50,20 +61,20 @@ export default class Buttons extends React.Component {
 }
 
 
-export class InfoPanel extends React.Component {
+class InfoPanel extends React.Component {
   render() {
     return (
-      <View style={styles.panel}>
-        <View>
-          <Text style={styles.greeting}>Room Info</Text>
-          <Text>{this.props.info}</Text>
+      <View>
+        <View style={styles.infoPanel}>
+          <Text style={styles.header}>Room Info</Text>
+          <Text style={{fontSize: 20, textAlign: 'center', fontWeight: 'bold'}}>{this.props.info}</Text>
         </View>
       </View>
     );
   }
 }
 
-const ConnectedButtons = connect(Buttons);
+const ConnectedButtonInfoPanel = connect(ButtonInfoPanel);
 const ConnectedInfoPanel = connect(InfoPanel);
 
 const styles = StyleSheet.create({
@@ -87,5 +98,5 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('ConnectedButtons', () => ConnectedButtons);
+AppRegistry.registerComponent('ConnectedButtons', () => ConnectedButtonInfoPanel);
 AppRegistry.registerComponent('ConnectedInfoPanel', () => ConnectedInfoPanel);

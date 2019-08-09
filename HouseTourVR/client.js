@@ -18,7 +18,7 @@ function init(bundle, parent, options = {}) {
 
   // Render your app content to surfaces
   r360.renderToSurface(
-    r360.createRoot('ConnectedButtons', {
+    r360.createRoot('ConnectedButtonInfoPanel', {
       /* initial props */
     }),
     buttonsPanel
