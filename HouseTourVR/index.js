@@ -22,11 +22,11 @@ class Button extends React.Component {
     return (
       <VrButton
           style={this.state.hover ? styles.hover : styles.button}
-          onEnter={}
-          onExit={}
-          onClick={() => this.clickHandler(room)}
+          onEnter={() => this.setState({hover: true})}
+          onExit={() => this.setState({hover: false})}
+          onClick={() => this.clickHandler(this.props.room)}
         >
-          <Text style={{ backgroundColor: "green" }}>{room}</Text>
+          <Text style={{textAlign: 'center'}}>{this.props.room}</Text>
         </VrButton>
     )
   }
@@ -78,14 +78,48 @@ const ConnectedButtonInfoPanel = connect(ButtonInfoPanel);
 const ConnectedInfoPanel = connect(InfoPanel);
 
 const styles = StyleSheet.create({
-  panel: {
+  infoPanel: {
     // Fill the entire surface
-    width: 1000,
-    height: 600,
-    backgroundColor: "rgba(255, 255, 255, 0.4)",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    width: 400,
+    height: 400,
+    opacity: 0.8,
+    backgroundColor: "rgb(255, 200, 50)",
+    borderColor: "rgb(255, 255, 255)",
+    borderWidth: 5,
+    borderRadius: 20,
+    flexDirection: "column",
+    justifyContent: "space-around",
     alignItems: "center"
+  },
+  buttonPanel: {
+    width:  400,
+    height: 400,
+    opacity: 0.8,
+    backgroundColor: 'rgb(255, 200, 50)',
+    borderColor: 'rgb(255, 255, 255)',
+    borderWidth: 5,
+    borderRadius: 20,
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  button: {
+    width: 200,
+    backgroundColor: 'rgb(0, 0, 0)',
+    borderColor: 'rgb(255, 255, 255)',
+    borderWidth: 5
+
+  },
+  hover: {
+    width: 200,
+    backgroundColor: 'rgb(0, 45, 72)',
+    borderColor: 'rgb(255, 255, 255)',
+    borderRadius: 5
+  },
+  header: {
+    fontSize: 40,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   greetingBox: {
     padding: 20,
@@ -98,5 +132,5 @@ const styles = StyleSheet.create({
   }
 });
 
-AppRegistry.registerComponent('ConnectedButtons', () => ConnectedButtonInfoPanel);
+AppRegistry.registerComponent('ConnectedButtonInfoPanel', () => ConnectedButtonInfoPanel);
 AppRegistry.registerComponent('ConnectedInfoPanel', () => ConnectedInfoPanel);
